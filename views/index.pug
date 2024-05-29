@@ -1,0 +1,70 @@
+extends layout 
+block content 
+  head
+    meta(charset="UTF-8")
+    title Chat Interface
+    link(rel="stylesheet", href=" /css/styles.css")
+  body
+    .container.clearfix
+      #people-list.people-list
+        .search
+          input(type="text" placeholder="search")
+          i.fa.fa-search
+        ul.list
+          li.clearfix
+            img(src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar")
+            .about
+              .name User
+              .status
+                i.fa.fa-circle.online
+                |  online
+      .chat
+        .chat-history
+          ul
+            li.clearfix
+              .message-data.align-right
+                span.message-data-time 10:10 AM, Hoy
+                |  &nbsp; &nbsp;
+                span.message-data-name User2
+                i.fa.fa-circle.me
+              .message.other-message.float-right
+                | Hola bro como estas hoy?
+            li
+              .message-data
+                span.message-data-name
+                  i.fa.fa-circle.online
+                  |  User
+                span.message-data-time 10:12 AM, Hoy
+              .message.my-message
+                | estoy bien gracias por preguntar
+              i.fa.fa-circle.online
+              i.fa.fa-circle.online(style="color: #AED2A6")
+              i.fa.fa-circle.online(style="color:#DAE9DA")
+        // end chat-history
+        .chat-message.clearfix
+          textarea#message-to-send(name="message-to-send" placeholder="Type your message" rows="3")
+          i.fa.fa-file-o
+          |  &nbsp;&nbsp;&nbsp;
+          i.fa.fa-file-image-o
+          button Enviar
+        // end chat-message
+    // end container
+
+    script#message-template(type="text/x-handlebars-template").
+      li.clearfix
+        .message-data.align-right
+          span.message-data-time {{time}}, Today
+          |  &nbsp; &nbsp;
+          span.message-data-name Olia
+          i.fa.fa-circle.me
+        .message.other-message.float-right
+          | {{messageOutput}}
+    script#message-response-template(type="text/x-handlebars-template").
+      li
+        .message-data
+          span.message-data-name
+            i.fa.fa-circle.online
+            |  Vincent
+          span.message-data-time {{time}}, Today
+        .message.my-message
+          | {{response}}

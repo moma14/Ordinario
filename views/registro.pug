@@ -1,0 +1,15 @@
+extends layout 
+
+block content
+  head
+    link(rel="stylesheet", href="styles.css")
+  body
+    .main  
+      .login
+        form(action="/registro", method="POST")
+          label(for="chk", aria-hidden="true") Sign up
+          input(type="text", name="usuario", placeholder="User name", required="")
+          input(type="email", name="email", placeholder="Email", required="")
+          input(type="password", name="password", placeholder="Password", required="")
+          input(type="password", name="confirmPassword", placeholder="Confirm Password", required="")
+          button(type="submit") Sign up

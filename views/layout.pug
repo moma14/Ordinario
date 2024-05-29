@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title #{title}
+    link(rel='stylesheet', href='/css/styles.css')
+    link(rel='stylesheet')
+  body
+    nav
+      ul
+        li
+          a(href='/') Inicio
+        if isAuthenticated
+          li 
+            a(href='/logout') Cerrar sesión
+        else
+          li 
+            a(href='/login') Iniciar sesión
+  
+    .container
+      block content
