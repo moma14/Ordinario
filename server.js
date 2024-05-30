@@ -14,7 +14,7 @@ app.use(flash());
 
 // Configuración de express-session
 app.use(session({
-  secret: 'jdnjcneivneivn23onr2432', // Cambia esto por una cadena de caracteres aleatoria y segura
+  secret: process.env.ACCESS_TOKEN_SECRET, // Cambia esto por una cadena de caracteres aleatoria y segura
   resave: false,
   saveUninitialized: false,
 }));

@@ -275,7 +275,7 @@ nav ul li a:hover {
 .signup {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 50%;
 }
 
 .main label {
@@ -290,12 +290,12 @@ nav ul li a:hover {
 }
 .main input {
   width: 60%;
-  height: 20px;
+  height: 30px;
   background: #e0dede;
   color: #000;
   justify-content: center;
   display: flex;
-  margin: 20px auto;
+  margin: 40px auto;
   padding: 10px;
   border: none;
   outline: none;
@@ -323,7 +323,7 @@ button:hover {
   background: #cac1db;
 }
 
-.login {
+.container-login {
   position: relative;
   width: 100%;
   height: 100%;
