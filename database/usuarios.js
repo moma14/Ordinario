@@ -70,10 +70,24 @@ async function getId(id) {
     }
 }
 
+async function getAllUsers () {
+    let conexion;
+    try{
+        conexion = await pool.getConnection();
+        const usuarios = await conexion.query('SELECT * FROM usuarios');
+        return true;
+    } catch (error) {
+        console.error('No se pudieron obtener todos los usuarios');
+    } finally {
+        if (conexion) conexion.release();
+    }
+}
+
 module.exports = {
     hashPassword,
     comparePassword,
     registroUser,
     getUserPorEmail,
-    getId
+    getId,
+    getAllUsers
 };
