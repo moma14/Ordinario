@@ -26,36 +26,37 @@ block content
                 .name No hay usuarios
       .chat
         .chat-history
-          ul
+          ul#chat-history
             if mensajes && mensajes.length
               each mensaje in mensajes
                 li.clearfix
-                  if mensaje.idEmisor === emisor_id  
+                  if mensaje.idEmisor === emisor_id
                     .message-data.align-right
                       span.message-data-time= mensaje.hora
                       |  &nbsp; &nbsp;
-                      span.message-data-name= mensaje.emisor_id 
+                      span.message-data-name= mensaje.emisor_id
                       i.fa.fa-circle.me
                     .message.other-message.float-right
-                      |= mensaje.contenido
+                      | #{mensaje.contenido}
                   else
                     .message-data
                       span.message-data-name
                         i.fa.fa-circle.online
-                        |= mensaje.nombreEmisor
+                        | #{mensaje.nombreEmisor}
                       span.message-data-time= mensaje.hora
                     .message.my-message
-                      |= mensaje.contenido
+                      | #{mensaje.contenido}
             else
               li.clearfix
                 .about
                   .name No hay mensajes
         // end chat-history
         .chat-message.clearfix
-          textarea#message-to-send(name="message-to-send" placeholder="Type your message" rows="3")
-          i.fa.fa-file-o
-          |  &nbsp;&nbsp;&nbsp;
-          i.fa.fa-file-image-o
-          button Enviar
+          form#send-message-form(action="/send-message", method="post")
+            textarea#message-to-send(name="message-to-send" placeholder="Type your message" rows="3")
+            i.fa.fa-file-o
+            |  &nbsp;&nbsp;&nbsp;
+            i.fa.fa-file-image-o
+            button(type="submit") Enviar
         // end chat-message
     // end container
