@@ -36,16 +36,18 @@ async function logearUsuario(email, passwordHash) {
         throw error;
     }
 }
-async function obtenerUsuarios(){
-    try{
-        const response = await axios.get(`/api/usuarios`);
-    }
-    catch(error){
+async function obtenerUsuarios() {
+    try {
+        const response = await axios.get(`${process.env.BASE_URL}/api/usuarios`);
+        return response.data.map(user => new Usuario(user.id, user.usuario, user.email, user.passwordHash));
+    } catch (error) {
         console.error('Error al obtener usuarios', error);
         throw error;
     }
 }
+
 module.exports = {
     registrarUsuario,
-    logearUsuario
+    logearUsuario,
+    obtenerUsuarios
 };
