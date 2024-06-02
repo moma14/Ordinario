@@ -1,6 +1,8 @@
 const userModel = require('../models/Usuariomodel');
 const { hashPassword } = require('../database/usuarios');
 
+
+// app.js
 // Controlador para el registro de usuarios
 const registroUsuario = async (req, res) => {
     try {
@@ -23,12 +25,12 @@ const registroUsuario = async (req, res) => {
             return res.redirect('/login');
         } else {
             req.session.error = 'Ya hay un usuario registrado con ese email';
-            return res.redirect('/registro');
+            return res.redirect('/api/login');
         }
     } catch (error) {
         console.error('Error al registrar usuario:', error);
         req.session.error = 'Error interno del servidor';
-        return res.redirect('/registro');
+        return res.redirect('/api/registro');
     }
 };
 

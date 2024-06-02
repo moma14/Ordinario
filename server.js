@@ -9,6 +9,8 @@ const cookieParser=require('cookie-parser');
 const router = require('./routes/routes');
 const flash=require('connect-flash');
 
+
+
 app.use(cookieParser());
 app.use(flash());
 
@@ -69,7 +71,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', router);
 
 // Puerto en el que escucha el servidor
-const port = 3000;
+const port = 3001;
 app.listen(port, () => {
   console.log(`Servidor iniciado en http://localhost:${port}`);
 });

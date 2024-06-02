@@ -8,8 +8,8 @@ const registro=require('./registro');
 
 
 router.use('/',index);
-router.use('/login',login);
-router.use('/registro',registro);
+router.use('/api',login);
+router.use('/api',registro);
 
 
 module.exports=router;
