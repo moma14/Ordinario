@@ -26,6 +26,7 @@ router.post('/login', async (req, res) => {
         }
 
         req.session.userId = user.id;
+        console.log("ID del usuario: ", req.session.userId);
 
         // se redirige al usuario a la página  principal
         res.redirect('/');

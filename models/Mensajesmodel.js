@@ -1,49 +1,45 @@
 const axios = require('axios');
 const dotenv = require('dotenv');
 
-//Configura DotEnv
+// Configura DotEnv
 dotenv.config();
 
-class Mensajes {
+class Chat {
   constructor(id, idReceptor, idEmisor, chat, multimedia) {
     this.id = id;
-    this.idReceptor = idReceptor;
-    this.idEmisor = idEmisor;
+    this.idReceptor = parseInt(idReceptor, 10);
+    this.idEmisor = parseInt(idEmisor, 10);
     this.chat = chat;
     this.multimedia = multimedia;
   }
 }
 
-async function EnviarMensaje(chat, idReceptor, multimedia, token) {
-    const axiosConfig = {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      };
+async function EnviarMensaje(chat, idReceptor, multimedia, idEmisor) {
   try {
-    const response = await axios.post(`${process.env.BASE_URL}/send-message`, { chat, idReceptor, multimedia } ,axiosConfig);
-    const mensajes = response.data;
-    return mensajes.map(mensaje => new Mensaje(mensaje.id,
-      mensaje.chat, mensaje.idReceptor, mensaje.multimedia));
+    const response = await axios.post(`${process.env.BASE_URL}/api/send-message`, { chat, idReceptor, idEmisor, multimedia });
+    if (response.data.success) {
+        return new Chat(null, idReceptor, idEmisor, chat, multimedia);
+    } else {
+        throw new Error('Error al enviar el mensaje');
+    }
   } catch (error) {
-    console.error('Error al obtener todos los productos:', error);
+    console.error('Error al enviar el mensaje:', error);
     throw error;
   }
 }
 
-async function obtenerMensajePorId(id) {
+async function obtenerMensajesPorIds(idEmisor, idReceptor) {
   try {
-    const response = await axios.get(`${process.env.BASE_URL}/get-messages/${id}`);
-    const mensaje = response.data;
-    return new Mensajes(mensaje.id, mensaje.chat,
-      mensaje.idReceptor, mensaje.idEmisor, mensaje.chat, mensaje.multimedia);
+    const response = await axios.get(`${process.env.BASE_URL}/api/get-messages/${idEmisor}/${idReceptor}`);
+    const chats = response.data;
+    return chats.map(chat => new Chat(chat.id, chat.receptor_id, chat.emisor_id, chat.mensaje, chat.multimedia));
   } catch (error) {
-    console.error('Error al obtener los mensajes por ID:', error);
+    console.error('Error al obtener los mensajes por IDs:', error);
     throw error;
   }
 }
 
 module.exports = {
   EnviarMensaje,
-  obtenerMensajePorId
+  obtenerMensajesPorIds
 };

@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  head
+    meta(charset="UTF-8")
+    title= title
+    link(rel="stylesheet", href="/css/styles.css")
+  body
+    .container.clearfix
+      .chat
+        ul#chat-history
+          if mensajes && mensajes.length
+            each mensaje in mensajes
+              li.clearfix
+                if mensaje.idEmisor === emisor_id
+                  // Mensaje del emisor
+                  .message-data.align-right
+                    span.message-data-time= mensaje.timestamp
+                    |  &nbsp; &nbsp;
+                    span.message-data-name= mensaje.idEmisor
+                    i.fa.fa-circle.me
+                  .message.other-message.float-right
+                    | #{mensaje.chat}
+                else
+                  // Mensaje del receptor
+                  .message-data
+                    span.message-data-name
+                      i.fa.fa-circle.online
+                      | #{mensaje.idEmisor}
+                    span.message-data-time= mensaje.timestamp
+                  .message.my-message
+                    | #{mensaje.chat}
+          else
+            // No hay mensajes
+            li.clearfix
+              .about
+                .name No hay mensajes
+        // Formulario para enviar mensajes
+        .chat-message.clearfix
+          form#send-message-form(action="/api/send-messages", method="post")
+            input(type="hidden" name="receptor_id" value=receptor_id)
+            textarea#message-to-send(name="contenido" placeholder="Type your message" rows="3")
+            input(type="hidden" name="multimedia" value="")
+            i.fa.fa-file-o
+            |  &nbsp;&nbsp;&nbsp;
+            i.fa.fa-file-image-o
+            button(type="submit") Enviar
+        // end chat-message
+      // end chat
+    // end container
