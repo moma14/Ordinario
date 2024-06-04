@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             messageElement.innerHTML = `
               <div class="message-data align-right">
                 <span class="message-data-time">${mensaje.hora}</span>
-                &nbsp; &nbsp;
+                &nbsp; &nbsp;s
                 <span class="message-data-name">${mensaje.nombreEmisor}</span>
                 <i class="fa fa-circle me"></i>
               </div>

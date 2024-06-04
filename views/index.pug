@@ -8,9 +8,6 @@ block content
   body
     .container.clearfix
       #people-list.people-list
-        .search
-          input(type="text" placeholder="search")
-          i.fa.fa-search
         ul.list
           if usuarios && usuarios.length
             each user in usuarios
@@ -18,7 +15,7 @@ block content
                 a(href=`/api/get-messages/${user.id}`, data-receptor=user) 
                   img(src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar")
                   .about
-                    .name= user.usuario
+                    .name#user= user.usuario
                     .status
                       p.email= user.email
           else
@@ -50,14 +47,6 @@ block content
             else
               li.clearfix
                 .about
-                  .name No hay mensajes
-        // end chat-history
-        .chat-message.clearfix
-          form#send-message-form(action="/send-message", method="post")
-            textarea#message-to-send(name="message-to-send" placeholder="Type your message" rows="3")
-            i.fa.fa-file-o
-            |  &nbsp;&nbsp;&nbsp;
-            i.fa.fa-file-image-o
-            button(type="submit") Enviar
-        // end chat-message
-    // end container
+                  .name Bienvenido a Chat Tony por favor registrese para comenzar
+                  .name Para usar el chat necesita registrar a por lo menos dos usuarios.
+                  .name Una vez registrados le apareceran los nuevos usuarios en la parte izquierda, seleccione el que desee y comience a chatear.
